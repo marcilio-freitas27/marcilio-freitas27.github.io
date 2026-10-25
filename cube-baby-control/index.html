@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111318" />
+  <title>Cube Baby Web Control</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">M-VAVE / CUVAVE</p>
+        <h1>Cube Baby Web Control</h1>
+        <p class="subtitle">Editor web experimental via Web MIDI + SysEx</p>
+      </div>
+      <div class="connection-card">
+        <span id="statusDot" class="status-dot offline"></span>
+        <div>
+          <strong id="connectionStatus">Desconectado</strong>
+          <small id="deviceName">Nenhum dispositivo selecionado</small>
+        </div>
+      </div>
+    </header>
+
+    <section class="panel connect-panel">
+      <div>
+        <h2>1. Conectar</h2>
+        <p>Use Chrome ou Edge. O navegador pedirá permissão para MIDI/SysEx.</p>
+      </div>
+      <div class="connect-actions">
+        <button id="connectBtn" class="primary">Conectar Cube Baby</button>
+        <select id="midiOutput" aria-label="Saída MIDI"></select>
+        <select id="midiInput" aria-label="Entrada MIDI"></select>
+      </div>
+    </section>
+
+    <section class="panel safety-panel">
+      <div>
+        <h2>2. Modo de escrita</h2>
+        <p>Por segurança, a interface começa apenas monitorando. Ative a escrita para enviar parâmetros à RAM do pedal.</p>
+      </div>
+      <label class="switch-row">
+        <input id="writeMode" type="checkbox" />
+        <span class="switch"></span>
+        <span>Permitir escrita experimental</span>
+      </label>
+    </section>
+
+    <section class="panel preset-panel">
+      <div class="section-head">
+        <div>
+          <h2>3. Presets</h2>
+          <p>Escolha um ponto de partida e ajuste ao vivo.</p>
+        </div>
+        <div class="slot-picker" role="group" aria-label="Preset slot">
+          <button class="slot active" data-slot="A">A</button>
+          <button class="slot" data-slot="B">B</button>
+          <button class="slot" data-slot="C">C</button>
+        </div>
+      </div>
+      <div id="presetGrid" class="preset-grid"></div>
+    </section>
+
+    <section class="panel controls-panel">
+      <div class="section-head">
+        <div>
+          <h2>4. Ajuste fino</h2>
+          <p>Os sliders usam a faixa MIDI 0–127.</p>
+        </div>
+        <button id="sendAllBtn" class="secondary">Enviar todos</button>
+      </div>
+
+      <div class="controls-grid" id="controlsGrid"></div>
+
+      <div class="toggles">
+        <label><input type="checkbox" id="tone_section" checked /> Tone/Drive ativo</label>
+        <label><input type="checkbox" id="delay_section" checked /> Delay ativo</label>
+        <label><input type="checkbox" id="ir_section" checked /> IR/Cab ativo</label>
+      </div>
+    </section>
+
+    <section class="panel advanced-panel">
+      <details>
+        <summary>Diagnóstico MIDI / SysEx</summary>
+        <div class="diagnostics-actions">
+          <button id="identifyBtn" class="secondary">Solicitar nome/versão</button>
+          <button id="readBtn" class="secondary">Ler 13 bytes do slot</button>
+          <button id="clearLogBtn" class="ghost">Limpar log</button>
+        </div>
+        <pre id="midiLog">Aguardando conexão…</pre>
+      </details>
+    </section>
+
+    <footer>
+      <span>Projeto não oficial. Escrita feita somente em RAM no modo experimental.</span>
+      <span id="secureInfo"></span>
+    </footer>
+  </main>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
